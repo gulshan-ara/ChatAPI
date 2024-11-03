@@ -4,6 +4,8 @@ import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { setupSocketIO } from "./socket";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 import messagesRouter from "./routes/messages";
 import notificationsRouter from './routes/notifications';
 
@@ -14,6 +16,28 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+
+// Swagger options
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'RealTime Chat & Notification Service API',
+      version: '1.0.0',
+      description: 'API for realtime chat and managing notifications including push, email, and SMS.',
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000',
+        description: 'Development server',
+      },
+    ],
+  },
+  apis: ['./src/routes/*.ts'], // Path to the API docs
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Basic route
 app.get("/", (req: Request, res: Response) => {

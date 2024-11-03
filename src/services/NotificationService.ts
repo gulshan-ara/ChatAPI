@@ -1,6 +1,7 @@
 class NotificationService {
   static async sendPushNotification(userId: string, message: string) {
     // Implement push notification logic
+    
   }
 
   static async sendEmailNotification(email: string, subject: string, body: string) {
