@@ -3,7 +3,7 @@ class NotificationPreferences {
     // Fetch user notification preferences from the database
   }
 
-  static async updateUserPreferences(userId: string, preferences: object) {
+  static async updateUserPreferences(userId: string, preferences: string) {
     // Update user preferences in the database
   }
 }
