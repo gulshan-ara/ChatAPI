@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { setupSocketIO } from "./socket";
 import messagesRouter from "./routes/messages";
+import notificationsRouter from './routes/notifications';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // Routes
 app.use("/api/messages", messagesRouter);
+app.use('/api/notifications', notificationsRouter);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI as string)
